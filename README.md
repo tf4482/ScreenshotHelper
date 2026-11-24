@@ -17,6 +17,7 @@ and nameplates; show player names again; restore the original state.
 - **Settings page** - all options in the game menu under Options > AddOns, also opened
   from the addon compartment menu.
 - **Chat commands** - every option can also be changed by slash command.
+- **German** - texts in German on German clients, English everywhere else.
 
 Take the screenshots yourself with the game's screenshot key. Not available in combat
 (the game blocks changing nameplate settings there).

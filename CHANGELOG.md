@@ -13,3 +13,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 - Names and nameplates restored on login after a reload during the steps.
 - Key binding row on the settings page, shared with Options > Keybindings.
 - Settings page and per-character settings.
+- German texts on German clients, English everywhere else.
