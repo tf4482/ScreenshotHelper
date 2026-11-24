@@ -1,0 +1,6 @@
+<!-- Key binding: Options > Keybindings > AddOns > ScreenshotHelper -->
+<Bindings>
+  <Binding name="SCREENSHOTHELPER_SHOT" category="ADDONS">
+    SlashCmdList.SCREENSHOTHELPER("")
+  </Binding>
+</Bindings>
