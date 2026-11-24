@@ -3,10 +3,42 @@
 
 local ADDON, ns = ...
 
+-- texts by locale: German for deDE clients, English for all others
+local L = {
+  binding = "Next screenshot mode step",
+  hidden = "UI, names, and nameplates hidden",
+  players = "player names shown",
+  restored = "original state restored",
+  combat = "not available in combat",
+  session = "names and nameplates restored from the last session",
+  step = "step",
+  perCharacter = "per character",
+  next = "next step with ",
+  helpStatus = "show the current step and settings",
+  helpCharacter = "use settings for this character only, or the account's",
+  helpConfig = "open the settings page",
+}
+if GetLocale() == "deDE" then
+  L = {
+    binding = "Nächste Screenshot-Modus-Stufe",
+    hidden = "UI, Namen und Namensplaketten ausgeblendet",
+    players = "Spielernamen eingeblendet",
+    restored = "Ursprünglicher Zustand wiederhergestellt",
+    combat = "im Kampf nicht verfügbar",
+    session = "Namen und Namensplaketten aus der letzten Sitzung wiederhergestellt",
+    step = "Stufe",
+    perCharacter = "pro Charakter",
+    next = "nächste Stufe mit ",
+    helpStatus = "aktuelle Stufe und Einstellungen anzeigen",
+    helpCharacter = "Einstellungen nur für diesen Charakter oder für den Account verwenden",
+    helpConfig = "Einstellungsseite öffnen",
+  }
+end
+
 -- key binding action from Bindings.xml
 local BINDING = "SCREENSHOTHELPER_SHOT"
 -- key binding label in Options > Keybindings > AddOns and on the settings page
-BINDING_NAME_SCREENSHOTHELPER_SHOT = "Next screenshot mode step"
+BINDING_NAME_SCREENSHOTHELPER_SHOT = L.binding
 
 -- CVars that show unit names and nameplates; missing ones are skipped per client
 local NAME_CVARS = {
@@ -72,19 +104,19 @@ end
 
 -- work and chat line per step
 local STEPS = {
-  { run = HideAll, text = "UI, names, and nameplates hidden" },
-  { run = ShowPlayerNames, text = "player names shown" },
-  { run = RestoreAll, text = "original state restored" },
+  { run = HideAll, text = L.hidden },
+  { run = ShowPlayerNames, text = L.players },
+  { run = RestoreAll, text = L.restored },
 }
 
 -- advance to the next step; CVars cannot change in combat
 local function Next()
   if InCombatLockdown() then
-    return ns.Error("not available in combat")
+    return ns.Error(L.combat)
   end
   step = step % #STEPS + 1
   STEPS[step].run()
-  ns.Print(ns.Color("value", "step " .. step .. "/" .. #STEPS) .. ": " .. STEPS[step].text)
+  ns.Print(ns.Color("value", L.step .. " " .. step .. "/" .. #STEPS) .. ": " .. STEPS[step].text)
   if step == #STEPS then
     step = 0
   end
@@ -92,9 +124,9 @@ end
 
 -- current state and settings
 local function Status()
-  ns.Status("step", step .. "/" .. #STEPS)
-  ns.Status("per character", ns.OnOff(ns.char.perCharacter))
-  ns.Detail(ns.Color("muted", "next step with ") .. ns.Color("command", ns.slash))
+  ns.Status(L.step, step .. "/" .. #STEPS)
+  ns.Status(L.perCharacter, ns.OnOff(ns.char.perCharacter))
+  ns.Detail(ns.Color("muted", L.next) .. ns.Color("command", ns.slash))
 end
 
 -- switch per-character settings and report the new state
@@ -131,7 +163,7 @@ function events.PLAYER_LOGIN()
   AddKeybinding()
   if next(ns.db.savedCVars) then
     RestoreNames()
-    ns.Print("names and nameplates restored from the last session")
+    ns.Print(L.session)
   end
 end
 
@@ -150,12 +182,12 @@ ns.Store("ScreenshotHelperDB", { savedCVars = {} }, function()
 end)
 
 -- chat commands
-ns.Command({ name = "status", help = "show the current step and settings", run = Status })
+ns.Command({ name = "status", help = L.helpStatus, run = Status })
 ns.Command({
   name = "character",
-  help = "use settings for this character only, or the account's",
+  help = L.helpCharacter,
   args = { { name = "state", choices = { "on", "off" } } },
   run = function(args) PerCharacter(args.state == "on") end,
 })
-ns.Command({ name = "config", help = "open the settings page", run = ns.OpenSettings })
+ns.Command({ name = "config", help = L.helpConfig, run = ns.OpenSettings })
 ns.Slash({ "/ssh", "/screenshothelper" }, Next)
