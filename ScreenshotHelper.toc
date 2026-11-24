@@ -1,0 +1,15 @@
+## Interface: 16001, 120105
+## Title: ScreenshotHelper
+## Notes: Takes a clean screenshot without UI, names, or nameplates
+## Author: tf4482
+## Version: @project-version@
+## IconTexture: Interface/Icons/INV_Misc_Spyglass_03
+## SavedVariables: ScreenshotHelperDB
+## SavedVariablesPerCharacter: ScreenshotHelperCharDB
+
+Output.lua
+Store.lua
+Combat.lua
+Settings.lua
+Slash.lua
+ScreenshotHelper.lua
