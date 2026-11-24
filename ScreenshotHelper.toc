@@ -1,4 +1,4 @@
-## Interface: 16001, 120105
+## Interface: 16001
 ## Title: ScreenshotHelper
 ## Notes: Screenshot mode in three steps: hide UI, names, and nameplates; show player names; restore
 ## Notes-deDE: Screenshot-Modus in drei Stufen: UI, Namen und Namensplaketten aus; Spielernamen an; wiederherstellen
@@ -9,6 +9,7 @@
 ## SavedVariablesPerCharacter: ScreenshotHelperCharDB
 ## X-Curse-Project-ID: 1827430
 
+Locale.lua
 Output.lua
 Store.lua
 Combat.lua

@@ -1,6 +1,8 @@
-<!-- Key binding: Options > Keybindings > AddOns > ScreenshotHelper -->
+<!-- Key bindings in their own section of Options > Keybindings: category is the TOC Title,
+     never "ADDONS", no header; each calls the slash command. ScreenshotHelper.lua sets the
+     BINDING_NAME_* labels; .luacheckrc and .luarc.json list them as globals -->
 <Bindings>
-  <Binding name="SCREENSHOTHELPER_SHOT" category="ADDONS">
+  <Binding name="SCREENSHOTHELPER_SHOT" category="ScreenshotHelper">
     SlashCmdList.SCREENSHOTHELPER("")
   </Binding>
 </Bindings>

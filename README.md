@@ -8,15 +8,16 @@ and nameplates; show player names again; restore the original state.
 - **Step 1** - hides the UI, all unit names, and nameplates; remembers what was on.
 - **Step 2** - shows player names again; your own name too, unless hidden by option.
 - **Step 3** - restores the original UI, names, and nameplates.
-- **Key binding** - assign a key on the addon's settings page or under Options >
-  Keybindings > AddOns; both set the same binding.
+- **Key binding** - assign a key on the addon's settings page or in its own section under
+  Options > Keybindings; both set the same binding.
 - **Safe** - after a reload or disconnect during the steps, names and nameplates come
   back on the next login.
 - **Remembered** - settings are saved per account, or per character with one checkbox;
   default is off.
 - **Settings page** - all options in the game menu under Options > AddOns, also opened
   from the addon compartment menu.
-- **Chat commands** - every option can also be changed by slash command.
+- **Chat commands** - every option can also be changed by slash command; `reset` restores
+  the defaults, `debug` shows each changed name setting in chat.
 - **German** - texts in German on German clients, English everywhere else.
 
 Take the screenshots yourself with the game's screenshot key. Not available in combat
@@ -44,8 +45,8 @@ Settings page with the key binding:
 
 1. Download `ScreenshotHelper-vX.Y.Z.zip` from the
    [releases](https://github.com/tf4482/ScreenshotHelper/releases) or CurseForge.
-2. Unzip it into `World of Warcraft/<client folder>/Interface/AddOns/`.
-3. Restart the game.
+2. Unzip it into `World of Warcraft/_forever_/Interface/AddOns/`.
+3. Restart the game or type `/reload`.
 
 ## Usage
 
@@ -56,6 +57,8 @@ Settings page with the key binding:
 /ssh hideown off      show your own name in step 2 (default)
 /ssh character on     use settings for this character only
 /ssh character off    use the account settings again
+/ssh reset            reset the settings to defaults
+/ssh debug on         show what the addon does, until /reload
 /ssh config           open the settings page
 /ssh help             list all commands
 ```
@@ -69,6 +72,8 @@ Settings page with the key binding:
 - Set the key: `/ssh config`, click the "Next screenshot mode step" button, press e.g.
   `Shift-F12`.
 - Macro: a macro with the line `/ssh` works on an action bar button.
+- Names stay hidden after a crash: `/ssh debug on`, `/reload`, and the restored settings
+  are listed in chat.
 
 ## Develop
 
@@ -79,8 +84,10 @@ Check the code with [Luacheck](https://github.com/lunarmodules/luacheck) before 
 luacheck .
 ```
 
-Release: push an annotated tag `vX.Y.Z`; GitHub Actions packages the addon with the
-BigWigs packager and publishes it.
+Deploy locally: run `deploy.bat`; it builds `release/ScreenshotHelper-vX.Y.Z.zip` from `VERSION`.
+
+Release: set `VERSION` to `X.Y.Z`, then push an annotated tag `vX.Y.Z`; GitHub Actions
+packages the addon with the BigWigs packager and publishes it.
 
 ## License
 
