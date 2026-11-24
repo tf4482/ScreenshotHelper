@@ -43,7 +43,7 @@ Settings page with the key binding:
 ## Install
 
 1. Download `ScreenshotHelper-vX.Y.Z.zip` from the
-   [releases](https://github.com/tf4482/ScreenshotHelper/releases).
+   [releases](https://github.com/tf4482/ScreenshotHelper/releases) or CurseForge.
 2. Unzip it into `World of Warcraft/<client folder>/Interface/AddOns/`.
 3. Restart the game.
 
