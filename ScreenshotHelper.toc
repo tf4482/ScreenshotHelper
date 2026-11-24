@@ -1,6 +1,7 @@
 ## Interface: 16001, 120105
 ## Title: ScreenshotHelper
-## Notes: Takes a clean screenshot without UI, names, or nameplates
+## Notes: Screenshot mode in three steps: hide UI, names, and nameplates; show player names; restore
+## Notes-deDE: Screenshot-Modus in drei Stufen: UI, Namen und Namensplaketten aus; Spielernamen an; wiederherstellen
 ## Author: tf4482
 ## Version: @project-version@
 ## IconTexture: Interface/Icons/INV_Misc_Spyglass_03
