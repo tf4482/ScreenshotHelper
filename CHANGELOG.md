@@ -12,3 +12,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
   restores.
 - Option to keep names and nameplates (`/ssh names on|off`), settings page, per-character
   settings.
+- Key binding row on the settings page, shared with Options > Keybindings.
