@@ -1,8 +1,10 @@
 -- Clean screenshot: hide UI, unit names, and nameplates, capture, then restore everything
 
-local _, ns = ...
+local ADDON, ns = ...
 
--- key binding label in Options > Keybindings > AddOns
+-- key binding action from Bindings.xml
+local BINDING = "SCREENSHOTHELPER_SHOT"
+-- key binding label in Options > Keybindings > AddOns and on the settings page
 BINDING_NAME_SCREENSHOTHELPER_SHOT = "Take clean screenshot"
 
 -- CVars that show unit names and nameplates; missing ones are skipped per client
@@ -107,8 +109,24 @@ local function PerCharacter(enabled)
   Status()
 end
 
+-- key binding row on the settings page; same binding as in Options > Keybindings
+local function AddKeybinding()
+  local title = C_AddOns.GetAddOnMetadata(ADDON, "Title") or ADDON
+  local category = Settings.GetCategory(title)
+  local layout = category and SettingsPanel:GetLayout(category)
+  local index = C_KeyBindings.GetBindingIndex(BINDING)
+  if layout and index then
+    layout:AddInitializer(CreateKeybindingEntryInitializer(index, true))
+  end
+end
+
 -- event handlers by event name
 local events = {}
+
+-- bindings are known now: add the key binding row
+function events.PLAYER_LOGIN()
+  AddKeybinding()
+end
 
 -- screenshot saved: restore
 function events.SCREENSHOT_SUCCEEDED()

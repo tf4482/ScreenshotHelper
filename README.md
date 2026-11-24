@@ -7,7 +7,8 @@ captures the screen, and restores everything right after.
 
 - **Clean screenshot** - one command or key hides UI, names, and nameplates, takes the
   screenshot, and restores the previous state.
-- **Key binding** - assign a key under Options > Keybindings > AddOns.
+- **Key binding** - assign a key on the addon's settings page or under Options >
+  Keybindings > AddOns; both set the same binding.
 - **Names option** - optionally keep names and nameplates in the screenshot.
 - **Remembered** - settings are saved per account, or per character with one checkbox;
   default is off.
@@ -40,7 +41,7 @@ Not available in combat (the game blocks changing nameplate settings there).
 ## Examples
 
 - Scenery shot: stand still, type `/ssh`; the image lands in `Screenshots/`.
-- One key: bind "Take clean screenshot" under Options > Keybindings > AddOns, e.g. to
+- One key: `/ssh config`, click the "Take clean screenshot" button, press e.g.
   `Shift-Print`.
 - Group photo with names: `/ssh names on`, then `/ssh`.
 - Macro: a macro with the line `/ssh` works on an action bar button.
