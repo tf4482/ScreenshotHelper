@@ -9,6 +9,7 @@
 ## SavedVariablesPerCharacter: ScreenshotHelperCharDB
 ## X-Curse-Project-ID: 1827430
 
+Locale.lua
 Output.lua
 Store.lua
 Combat.lua
