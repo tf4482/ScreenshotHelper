@@ -6,7 +6,7 @@ and nameplates; show player names again; restore the original state.
 ## Features
 
 - **Step 1** - hides the UI, all unit names, and nameplates; remembers what was on.
-- **Step 2** - shows player names again, own name included.
+- **Step 2** - shows player names again; your own name too, unless hidden by option.
 - **Step 3** - restores the original UI, names, and nameplates.
 - **Key binding** - assign a key on the addon's settings page or under Options >
   Keybindings > AddOns; both set the same binding.
@@ -34,6 +34,8 @@ Take the screenshots yourself with the game's screenshot key. Not available in c
 ```text
 /ssh                  next step (1 hide all, 2 player names, 3 restore)
 /ssh status           show the current step and settings
+/ssh hideown on       hide your own name in step 2
+/ssh hideown off      show your own name in step 2 (default)
 /ssh character on     use settings for this character only
 /ssh character off    use the account settings again
 /ssh config           open the settings page
@@ -45,6 +47,7 @@ Take the screenshots yourself with the game's screenshot key. Not available in c
 - Scenery shot: press the key once, press `Print`, press the key twice to restore.
 - Group photo with names: press the key twice, press `Print`, press once more.
 - Both versions: key, `Print`, key, `Print`, key.
+- Others only: `/ssh hideown on`, then step 2 shows only other players' names.
 - Set the key: `/ssh config`, click the "Next screenshot mode step" button, press e.g.
   `Shift-F12`.
 - Macro: a macro with the line `/ssh` works on an action bar button.
