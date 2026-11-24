@@ -103,10 +103,19 @@ local function PerCharacter(enabled)
   Status()
 end
 
+-- settings category of this addon, found by its title
+local function FindCategory()
+  local title = C_AddOns.GetAddOnMetadata(ADDON, "Title") or ADDON
+  for _, category in ipairs(SettingsPanel:GetAllCategories()) do
+    if category:GetName() == title then
+      return category
+    end
+  end
+end
+
 -- key binding row on the settings page; same binding as in Options > Keybindings
 local function AddKeybinding()
-  local title = C_AddOns.GetAddOnMetadata(ADDON, "Title") or ADDON
-  local category = Settings.GetCategory(title)
+  local category = FindCategory()
   local layout = category and SettingsPanel:GetLayout(category)
   local index = C_KeyBindings.GetBindingIndex(BINDING)
   if layout and index then
