@@ -6,9 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 
 ## [Unreleased]
 
+### Added
+
+- `/ssh reset` restores the default settings; `/ssh debug on|off` shows each changed
+  name setting in chat until `/reload`.
+- German texts for the settings page checkbox and chat command help.
+
 ### Changed
 
 - Only WoW Forever (interface 16001) listed in the TOC.
+- Key binding moved from the shared AddOns section to its own ScreenshotHelper section in
+  Options > Keybindings; an existing key assignment stays.
 
 ### Fixed
 
