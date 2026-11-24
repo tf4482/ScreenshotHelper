@@ -55,7 +55,7 @@ local NAME_CVARS = {
   "UnitNameEnemyPlayerName", "UnitNameEnemyPetName", "UnitNameEnemyGuardianName",
   "UnitNameEnemyTotemName", "UnitNameEnemyMinionName",
   "nameplateShowAll", "nameplateShowEnemies", "nameplateShowFriends",
-  "nameplateShowFriendlyPlayers", "nameplateShowFriendlyNpcs", "nameplateShowFriendlyNPCs",
+  "nameplateShowFriendlyPlayers", "nameplateShowFriendlyNPCs",
 }
 
 -- CVars that show player names; turned on in step 2, own name unless hidden by setting
@@ -172,12 +172,18 @@ end
 -- event handlers by event name
 local events = {}
 
+-- names back from the last session; stable function so AfterCombat queues it once
+local function RestoreSession()
+  RestoreNames()
+  ns.Print(L.session)
+end
+
 -- bindings are known now: add the key binding row; undo steps left open by a reload
 function events.PLAYER_LOGIN()
   AddKeybinding()
   if next(ns.db.savedCVars) then
-    RestoreNames()
-    ns.Print(L.session)
+    -- nameplate CVars are blocked in combat after a reload
+    ns.AfterCombat(RestoreSession)
   end
 end
 

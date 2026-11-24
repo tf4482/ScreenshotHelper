@@ -10,6 +10,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 
 - Only WoW Forever (interface 16001) listed in the TOC.
 
+### Fixed
+
+- Friendly NPC nameplates no longer stay off after step 3; the CVar was saved twice.
+- Names and nameplates left hidden by a reload in combat are restored after combat.
+
 ## [0.1.0] - 2026-11-24
 
 ### Added
