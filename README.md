@@ -22,6 +22,24 @@ and nameplates; show player names again; restore the original state.
 Take the screenshots yourself with the game's screenshot key. Not available in combat
 (the game blocks changing nameplate settings there).
 
+## Screenshots
+
+Normal view, before step 1 and after step 3:
+
+![Normal view](docs/normal.jpg)
+
+Step 1, UI, names, and nameplates hidden:
+
+![Step 1](docs/step1.jpg)
+
+Step 2, player names shown:
+
+![Step 2](docs/step2.jpg)
+
+Settings page with the key binding:
+
+![Settings](docs/settings.jpg)
+
 ## Install
 
 1. Download `ScreenshotHelper-vX.Y.Z.zip` from the
