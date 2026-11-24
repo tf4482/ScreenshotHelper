@@ -17,6 +17,9 @@ local L = {
   helpStatus = "show the current step and settings",
   helpCharacter = "use settings for this character only, or the account's",
   helpConfig = "open the settings page",
+  hideOwn = "Hide own name in step 2",
+  hideOwnTip = "Step 2 shows only other players' names, not your own",
+  helpHideOwn = "hide your own name in step 2, or show it",
 }
 if GetLocale() == "deDE" then
   L = {
@@ -32,6 +35,9 @@ if GetLocale() == "deDE" then
     helpStatus = "aktuelle Stufe und Einstellungen anzeigen",
     helpCharacter = "Einstellungen nur für diesen Charakter oder für den Account verwenden",
     helpConfig = "Einstellungsseite öffnen",
+    hideOwn = "Eigenen Namen in Stufe 2 ausblenden",
+    hideOwnTip = "Stufe 2 zeigt nur die Namen anderer Spieler, nicht den eigenen",
+    helpHideOwn = "eigenen Namen in Stufe 2 ausblenden oder anzeigen",
   }
 end
 
@@ -52,7 +58,7 @@ local NAME_CVARS = {
   "nameplateShowFriendlyPlayers", "nameplateShowFriendlyNpcs", "nameplateShowFriendlyNPCs",
 }
 
--- CVars that show player names, own name included; turned on in step 2
+-- CVars that show player names; turned on in step 2, own name unless hidden by setting
 local PLAYER_NAME_CVARS = { "UnitNameOwn", "UnitNameFriendlyPlayerName", "UnitNameEnemyPlayerName" }
 
 -- current step: 0 normal, 1 all hidden, 2 player names shown
@@ -79,7 +85,8 @@ end
 -- step 2: show player names again
 local function ShowPlayerNames()
   for _, name in ipairs(PLAYER_NAME_CVARS) do
-    if ns.db.savedCVars[name] ~= nil then
+    local skip = name == "UnitNameOwn" and ns.Get("hideOwnName")
+    if ns.db.savedCVars[name] ~= nil and not skip then
       SetCVar(name, "1")
     end
   end
@@ -125,8 +132,15 @@ end
 -- current state and settings
 local function Status()
   ns.Status(L.step, step .. "/" .. #STEPS)
+  ns.Status(L.hideOwn, ns.OnOff(ns.Get("hideOwnName")))
   ns.Status(L.perCharacter, ns.OnOff(ns.char.perCharacter))
   ns.Detail(ns.Color("muted", L.next) .. ns.Color("command", ns.slash))
+end
+
+-- switch hiding the own name and report the new state
+local function HideOwnName(enabled)
+  ns.Set("hideOwnName", enabled)
+  Status()
 end
 
 -- switch per-character settings and report the new state
@@ -177,12 +191,19 @@ frame:SetScript("OnEvent", function(_, event, ...)
 end)
 
 -- saved state: original CVar values while steps are open; settings page once loaded
-ns.Store("ScreenshotHelperDB", { savedCVars = {} }, function()
+ns.Store("ScreenshotHelperDB", { savedCVars = {}, hideOwnName = false }, function()
   ns.Settings()
+  ns.Checkbox("hideOwnName", L.hideOwn, L.hideOwnTip)
 end)
 
 -- chat commands
 ns.Command({ name = "status", help = L.helpStatus, run = Status })
+ns.Command({
+  name = "hideown",
+  help = L.helpHideOwn,
+  args = { { name = "state", choices = { "on", "off" } } },
+  run = function(args) HideOwnName(args.state == "on") end,
+})
 ns.Command({
   name = "character",
   help = L.helpCharacter,
